@@ -11,9 +11,6 @@ public class Main {
 
         int nChildren = Integer.parseInt(rd.readLine());
 
-        // debug nChildren
-        System.out.println(nChildren + " children");
-
         maxValue = processFindings(rd, nChildren);
 
         System.out.println(maxValue);
@@ -32,8 +29,6 @@ public class Main {
             String[] values = rd.readLine().split(" ");
 
             int nSticks = Integer.parseInt(values[0]);
-
-            System.out.println("child number" + (i+1) + "picked up" + nSticks);
 
             for (int j = 0; j < nSticks; j++) {
                 int current = Integer.parseInt(values[j+1]);
