@@ -4,7 +4,17 @@ public class MaxNumbers {
 
     public MaxNumbers(String line){
         this.line = line;
-        maxNumber = Math.
+        maxNumber = Integer.MIN_VALUE;
     }
 
+    public int getMaxValue(){
+        return maxNumber;
+    };
+
+    private void calcMaxValue(int[] values){
+        for(int i = 0; i < values.length; i++){
+            if(values[i] > maxNumber)
+                maxNumber = values[i];
+        }
+    }
 }
