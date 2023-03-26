@@ -26,7 +26,6 @@ public class Main {
 
     private static int[] getMosaic(BufferedReader rd, int colums, int rows) throws IOException{
         int[] nOccurrences = new int[colums + 1];
-        int occurrence = 0;
         int numberOccurrences = 0;
         char curLetter = ' ';
 
@@ -76,22 +75,6 @@ public class Main {
         System.out.println(nOccurrences[1]);
         System.out.println(nOccurrences[2]);
         System.out.println(nOccurrences[3]);
-
-
-
-
-
-
-      /*  String line = rd.readLine();
-
-        String[] constraints = line.split(" ");
-        int row = Integer.parseInt(constraints[0]);
-        int column = Integer.parseInt(constraints[1]);
-
-        int[] nOccourences = new int[column + 1];
-        int maxSeq = 0;*/
-
-
 
 
 
