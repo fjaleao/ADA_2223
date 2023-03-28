@@ -5,8 +5,8 @@ public class LegoMosaics {
     private int maxSeq;
 
 
-    public LegoMosaics(int[]nOccurrences, int maxSeq) {
-        this.nOccurrences = nOccurrences;
+    public LegoMosaics(int[] seqMap, int maxSeq) {
+        this.nOccurrences = seqMap;
         this.maxSeq = maxSeq;
     }
 
