@@ -47,12 +47,10 @@ public class MagicRescue {
             }
         }
 
-        for(int row = 0; row < TABLE_DEPTH - 1; row++){
-            if(table[row][0] < result)
-                result = table[row][0];
-        }
+        result = table[E][E];
 
     }
+
 
     private void resolveItem(int[][] table, int colum, char pos) {
         switch (pos){
