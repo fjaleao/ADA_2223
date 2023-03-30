@@ -14,11 +14,6 @@ public class MagicRescue {
     private static final int H = 1; // harp row
     private static final int P = 2; // potion row
     private static final int C = 3; // cloak row
-
-    /*
-    The usage of this constant is because there isn't any Infinity in class Integer.
-    Casting a Double or Floating Infinity and adding one will return the minimum value representable by an 'int'
-     */
     private static final int INTEGER_INFINITY = 2000000000;
 
 
@@ -33,6 +28,12 @@ public class MagicRescue {
         solve(line);
     }
 
+    /**
+     *
+     * @param line the route that Harry and Ron need to do to save Hermione
+     * Create a table and fill it with the respective possibility of each row
+     * After the table is filled, the result is in the position table[0][0]
+     */
     private void solve(String line) {
         int line_l = line.length();
         //Create a table with 4 rows (number of items with empty) and with x+ 1 empty colum. x is the length of
@@ -107,9 +108,6 @@ public class MagicRescue {
             case TROLL -> fillTableTroll(table, colum);
             case DRAGON -> fillTableDragon(table,colum);
         }
-
-
-
     }
 
     private void fillTableDog(int[][] table, int colum) {
