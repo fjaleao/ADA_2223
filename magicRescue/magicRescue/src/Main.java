@@ -18,6 +18,7 @@ public class Main {
         for(int i = 0; i < lines; i++){
             String line = rd.readLine();
             MagicRescue mr = new MagicRescue(line);
+            System.out.println(mr.getResult());
         }
 
     }
