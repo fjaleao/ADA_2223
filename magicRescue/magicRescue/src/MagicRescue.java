@@ -30,6 +30,12 @@ public class MagicRescue {
         solve(line);
     }
 
+    /**
+     *
+     * @param line the route that Harry and Ron need to do to save Hermione
+     * Create a table and fill it with the respective possibility of each row
+     * After the table is filled, the result is in the position table[0][0]
+     */
     public int getResult(){
         return result;
     }
