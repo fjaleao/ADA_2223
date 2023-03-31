@@ -8,6 +8,11 @@ public class MagicRescue {
     private static final char TROLL = 't';
     private static final char DRAGON = 'd';
 
+    private static final int T_DOG_SOM = 4;
+    private static final int TROLL_SOM = 5;
+
+    private static final int DRAGON_SOM =6;
+
     private static final int TABLE_DEPTH = 4;
 
     private static final int E = 0; //empty row
@@ -143,9 +148,9 @@ public class MagicRescue {
         for(int row = 0; row < TABLE_DEPTH; row++){
             switch (row){
                 case E -> array[row] = INTEGER_INFINITY;
-                case H -> array[row] = 4 + temp[H];
-                case P -> array[row] = 5 + temp[P];
-                case C -> array[row] = 6 + temp[C];
+                case H -> array[row] = T_DOG_SOM + temp[H];
+                case P -> array[row] = TROLL_SOM + temp[P];
+                case C -> array[row] = DRAGON_SOM + temp[C];
             }
         }
     }
@@ -160,8 +165,8 @@ public class MagicRescue {
         for(int row = 0; row < TABLE_DEPTH; row++){
             switch (row){
                 case E, H   -> array[row] = INTEGER_INFINITY;
-                case P      -> array[row] = 5 + temp[P];
-                case C      -> array[row] = 6 + temp[C];
+                case P      -> array[row] = TROLL_SOM + temp[P];
+                case C      -> array[row] = DRAGON_SOM + temp[C];
             }
         }
     }
@@ -178,7 +183,7 @@ public class MagicRescue {
         for (int row = 0; row < TABLE_DEPTH; row++) {
             switch (row) {
                 case E, H, P -> array[row] = INTEGER_INFINITY;
-                case C       -> array[row] = 6 + temp[C];
+                case C       -> array[row] = DRAGON_SOM + temp[C];
             }
         }
     }
