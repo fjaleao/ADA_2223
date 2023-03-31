@@ -16,8 +16,8 @@ public class Main {
      */
     private static void resolve(int lines, BufferedReader rd) throws IOException {
         for(int i = 0; i < lines; i++){
-            String line = rd.readLine();
-            MagicRescue mr = new MagicRescue(line.toCharArray());
+            char[] line = rd.readLine().toCharArray();
+            MagicRescue mr = new MagicRescue(line);
             System.out.println(mr.getResult());
         }
 

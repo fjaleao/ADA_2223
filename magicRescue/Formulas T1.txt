@@ -1,0 +1,113 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{geometry}
+\usepackage{lipsum} % for placeholder text
+
+\newgeometry{landscape} % change orientation to landscape
+
+
+
+\begin{document}
+
+\begin{flushleft}
+\begin{equation}
+V(b, i) =  \Bigg\{
+\begin{array}{lr}
+    E(b, i), & \text    b = e \\
+    M(b, i), & \text b = 3 \lor t \lor d \\
+    I(b, i), & \text b = h \lor p \lor c  \\
+\end{array}https://www.overleaf.com/project/6425b7f724296e65f98d45d7
+\end{equation}
+
+\begin{equation}
+E(b, i) =  \Bigg\{
+\begin{array}{lr}
+    1 + V(b + 1, \emptyset), & \text    b = e \land i = \emptyset\\
+    min(2 + V(b + 1, \emptyset), 3 + V(b + 1, h)) & \text b = e \land i = h \\
+    min(2 + V(b + 1, \emptyset), 3 + V(b + 1, p)) & \text b = e \land i = p \\
+    min(2 + V(b + 1, \emptyset), 3 + V(b + 1, c)) & \text b = e \land i = c \\
+\end{array}
+\end{equation}
+
+\begin{equation}
+M(b, i) =  \Bigg\{
+\begin{array}{lr}
+    Fill3 & \text b = 3\\
+    FillT & \text b = t \\
+    FillD & \text b = d \\
+\end{array}
+\end{equation}
+
+\begin{equation}
+Fill3(b, i) =  \Bigg\{
+\begin{array}{lr}
+    \infty &            \text b = 3 \land i = \emptyset\\
+    4 + V(b + 1, h) &   \text b = 3 \land i = h\\
+    5 + V(b + 1, p) &   \text b = 3 \land i = p\\
+    6 + V(b + 1, d) &   \text b = 3 \land i = c\\
+\end{array}
+\end{equation}
+
+\begin{equation}
+FillT(b, i) =  \Bigg\{
+\begin{array}{lr}
+    \infty &            \text b = t \land i = \emptyset\\
+    \infty &            \text b = t \land i = h\\
+    5 + V(b + 1, p) &   \text b = t \land i = p\\
+    6 + V(b + 1, d) &   \text b = t \land i = c\\
+\end{array}
+\end{equation}
+
+\begin{equation}
+FillD(b, i) =  \Bigg\{
+\begin{array}{lr}
+    \infty &            \text b = d \land i = \emptyset\\
+    \infty &            \text b = d \land i = h\\
+    \infty &            \text b = d \land i = p\\
+    6 + V(b + 1, d) &   \text b = d \land i = c\\
+\end{array}
+\end{equation}
+
+\begin{equation}
+I(b, i) =  \Bigg\{
+\begin{array}{lr}
+    FillH & \text b = h\\
+    FillP & \text b = p \\
+    FillC & \text b = c \\
+\end{array}
+\end{equation}
+
+\begin{equation}
+FillH(b, i) =  \Bigg\{
+\begin{array}{lr}
+    min(1 + V(b + 1,\emptyset), 3 + V(b + 1, h))                     & \text b = h \land i = \emptyset\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, h))                     & \text b = h \land i = h\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, p), 3 + V(b + 1, h))    & \text b = h \land i = p\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, c), 3 + V(b + 1, h))    & \text b = h \land i = c\\
+\end{array}
+\end{equation}
+
+\begin{equation}
+FillP(b, i) =  \Bigg\{
+\begin{array}{lr}
+    min(1 + V(b + 1,\emptyset), 3 + V(b + 1, p))                     & \text b = p \land i = \emptyset\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, h), 3 + V(b + 1, p))    & \text b = p \land i = h\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, p))                     & \text b = p \land i = p\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, c), 3 + V(b + 1, p))    & \text b = p \land i = c\\
+\end{array}
+\end{equation}
+
+\begin{equation}
+FillC(b, i) =  \Bigg\{
+\begin{array}{lr}
+    min(1 + V(b + 1,\emptyset), 3 + V(b + 1, c))                     & \text b = p \land i = \emptyset\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, h), 3 + V(b + 1, c))    & \text b = p \land i = h\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, p), 3 + V(b + 1, c))    & \text b = p \land i = p\\
+    min(2 + V(b + 1,\emptyset), 3 + V(b + 1, c))    & \text b = p \land i = c\\
+\end{array}
+\end{equation}
+
+
+
+\end{flushleft}
+\end{document}
