@@ -30,8 +30,8 @@ public class MagicRescue {
 
     /**
      *
-     * Create a table and fill it with the respective possibility of each row
-     * After the table is filled, the result is in the position table[0][0]
+     * Creates an array with all the possible items we can have, including nothing.
+     * The array will be a sum of fillings depending on the plot we are in
      * @param line the route that Harry and Ron need to do to save Hermione
      */
     private void solve(char[] line) {
@@ -53,10 +53,9 @@ public class MagicRescue {
 
 
     /**
-     * Fills the table with the cases when going through empty easy-plots
+     * Endpoint for dealing with item-filled plots
      *
      * @param array     table with results
-     * @param column    column to fill in the table
      * @param pos       plot content
      */
     private void resolveItem(int[] array, int column, char pos) {
@@ -69,7 +68,7 @@ public class MagicRescue {
     }
 
     /**
-     * Fills the table with the cases when going through harp easy-plots
+     * Fills the array with the cases when going through a harp-plot
      *
      * @param array     table with results
      */
@@ -86,7 +85,7 @@ public class MagicRescue {
     }
 
     /**
-     * Fills the table with the cases when going through potion easy-plots
+     * Fills the array with the cases when going through a potion-plot
      *
      * @param array     table with results
      */
@@ -103,7 +102,7 @@ public class MagicRescue {
     }
 
     /**
-     * Fills the table with the cases when going through cloak easy-plots
+     * Fills the array with the cases when going through a cloak-plot
      *
      * @param array     table with results
      */
@@ -135,7 +134,7 @@ public class MagicRescue {
     }
 
     /**
-     * Fills the table with the cases when dealing with three-headed dog plots
+     * Fills the array with the cases when dealing with a three-headed dog plot
      *
      * @param array     table with results
      */
@@ -152,7 +151,7 @@ public class MagicRescue {
     }
 
     /**
-     * Fills the table with the cases when dealing with troll plots
+     * Fills the array with the cases when dealing with a troll plot
      *
      * @param array     table with results
      */
@@ -169,7 +168,7 @@ public class MagicRescue {
 
 
     /**
-     * Fills the table with the cases when dealing with dragon plots
+     * Fills the array with the cases when dealing with a dragon plot
      *
      * @param array     table with results
      */
@@ -185,7 +184,7 @@ public class MagicRescue {
     }
 
     /**
-     * Fills the table with the cases when dealing with empty plots
+     * Fills the array with the cases when dealing with a empty plot
      *
      * @param array     table with results
      */
