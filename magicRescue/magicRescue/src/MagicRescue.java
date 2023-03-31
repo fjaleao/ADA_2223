@@ -20,6 +20,17 @@ public class MagicRescue {
     private static final int P = 2; // potion row
     private static final int C = 3; // cloak row
     private static final int INTEGER_INFINITY = 2000000000;
+    //Entry and exit with no item
+    private static final int NO_ITEM_NO_ITEM = 1;
+    //Entry with item and exit with no item
+    private static final int ITEM_NO_ITEM = 2;
+    //Entry with no item and exit with item
+    private static final int NO_ITEM_ITEM = 2;
+    //Entry with item and exit with item
+    private static final int ITEM_ITEM = 3;
+
+
+
 
 
     private char[] line;
@@ -81,10 +92,10 @@ public class MagicRescue {
         int[] temp = array.clone();
         for(int row = 0; row < TABLE_DEPTH; row++){
             switch (row){
-                case E -> array[row] = Math.min(1 + temp[E], 2 + temp[H]);
-                case H -> array[row] = Math.min(2 + temp[E], 3 + temp[H]);
-                case P -> array[row] = Math.min(2 + temp[E], Math.min(3 + temp[P], 3 + temp[H]));
-                case C -> array[row] = Math.min(2 + temp[E], Math.min(3 + temp[C], 3 + temp[H]));
+                case E -> array[row] = Math.min(NO_ITEM_NO_ITEM + temp[E], NO_ITEM_ITEM + temp[H]);
+                case H -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], ITEM_ITEM + temp[H]);
+                case P -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], Math.min(ITEM_ITEM + temp[P], ITEM_ITEM + temp[H]));
+                case C -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], Math.min(ITEM_ITEM + temp[C], ITEM_ITEM + temp[H]));
             }
         }
     }
@@ -98,10 +109,10 @@ public class MagicRescue {
         int[] temp = array.clone();
         for(int row = 0; row < TABLE_DEPTH; row++){
             switch (row){
-                case E -> array[row] = Math.min(1 + temp[E], 2 + temp[P]);
-                case H -> array[row] = Math.min(2 + temp[E], Math.min(3 + temp[H], 3 + temp[P]));
-                case P -> array[row] = Math.min(2 + temp[E], 3 + temp[P]);
-                case C -> array[row] = Math.min(2 + temp[E], Math.min(3 + temp[C], 3 + temp[P]));
+                case E -> array[row] = Math.min(NO_ITEM_NO_ITEM + temp[E], NO_ITEM_ITEM + temp[P]);
+                case H -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], Math.min(ITEM_ITEM + temp[H], ITEM_ITEM + temp[P]));
+                case P -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], ITEM_ITEM + temp[P]);
+                case C -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], Math.min(ITEM_ITEM + temp[C], ITEM_ITEM + temp[P]));
             }
         }
     }
@@ -115,10 +126,10 @@ public class MagicRescue {
         int[] temp = array.clone();
         for(int row = 0; row < TABLE_DEPTH; row++){
             switch (row){
-                case E -> array[row] = Math.min(1 + temp[E], 2 + temp[C]);
-                case H -> array[row] = Math.min(2 + temp[E], Math.min(3 + temp[H], 3 + temp[C]));
-                case P -> array[row] = Math.min(2 + temp[E], Math.min(3 + temp[P], 3 + temp[C]));
-                case C -> array[row] = Math.min(2 + temp[E], 3 + temp[C]);
+                case E -> array[row] = Math.min(NO_ITEM_NO_ITEM + temp[E], NO_ITEM_ITEM + temp[C]);
+                case H -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], Math.min(ITEM_ITEM + temp[H], ITEM_ITEM + temp[C]));
+                case P -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], Math.min(ITEM_ITEM + temp[P], ITEM_ITEM + temp[C]));
+                case C -> array[row] = Math.min(ITEM_NO_ITEM + temp[E], ITEM_ITEM + temp[C]);
             }
         }
     }
@@ -197,10 +208,10 @@ public class MagicRescue {
         int[] temp = array.clone();
         for (int row = 0; row < TABLE_DEPTH; row++) {
             switch (row) {
-                case E -> array[row] = 1 + temp[row];
-                case H -> array[row] = Math.min(2 + temp[E], 3 + temp[H]);
-                case P -> array[row] = Math.min(2 + temp[E], 3 + temp[P]);
-                case C -> array[row] = Math.min(2 + temp[E], 3 + temp[C]);
+                case E -> array[row] = NO_ITEM_NO_ITEM + temp[row];
+                case H -> array[row] = Math.min(NO_ITEM_ITEM + temp[E], ITEM_ITEM + temp[H]);
+                case P -> array[row] = Math.min(NO_ITEM_ITEM + temp[E], ITEM_ITEM + temp[P]);
+                case C -> array[row] = Math.min(NO_ITEM_ITEM + temp[E], ITEM_ITEM + temp[C]);
             }
         }
     }
