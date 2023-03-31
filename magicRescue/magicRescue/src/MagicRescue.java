@@ -30,19 +30,15 @@ public class MagicRescue {
         solve(line);
     }
 
-    /**
-     *
-     * @param line the route that Harry and Ron need to do to save Hermione
-     * Create a table and fill it with the respective possibility of each row
-     * After the table is filled, the result is in the position table[0][0]
-     */
     public int getResult(){
         return result;
     }
 
     /**
+     * Creates a table and fills it with the respective possibility of each case
+     * After the table is filled, the result is in the position table[0][0]
      * 
-     * @param line
+     * @param line      the route that Harry and Ron need to do to save Hermione
      */
     private void solve(char[] line) {
         int line_l = line.length;
@@ -64,152 +60,161 @@ public class MagicRescue {
 
 
     /**
+     * Fills the table with the cases when going through empty easy-plots
      * 
-     * @param table
-     * @param colum
-     * @param pos
+     * @param table     table with results
+     * @param column    column to fill in the table 
      */
-    private void resolveItem(int[][] table, int colum, char pos) {
-        switch (pos){
-            case HARP -> fillTableHarp(table, colum);
-            case POTION -> fillTablePotion(table, colum);
-            case CLOAK -> fillTableCloak(table, colum);
-        }
-
-    }
-
-    /**
-     * 
-     * @param table
-     * @param colum
-     */
-    private void fillTableHarp(int[][] table, int colum) {
-        for(int row = 0; row < TABLE_DEPTH; row++){
-            switch (row){
-                case E -> table[row][colum] = Math.min(1 + table[E][colum + 1], 2 + table[H][colum + 1]);
-                case H -> table[row][colum] = Math.min(2 + table[E][colum + 1], 3 + table[H][colum + 1]);
-                case P -> table[row][colum] = Math.min(2 + table[E][colum + 1], Math.min(3 + table[P][colum + 1],
-                        3 + table[H][colum + 1]));
-                case C -> table[row][colum] = Math.min(2 + table[E][colum + 1], Math.min(3 + table[C][colum + 1],
-                        3 + table[H][colum + 1]));
-            }
-        }
-    }
-
-    /***
-     * 
-     * @param table
-     * @param colum
-     */
-    private void fillTablePotion(int[][] table, int colum) {
-        for(int row = 0; row < TABLE_DEPTH; row++){
-            switch (row){
-                case E -> table[row][colum] = Math.min(1 + table[E][colum + 1], 2 + table[P][colum + 1]);
-                case H -> table[row][colum] =  Math.min(2 + table[E][colum + 1], Math.min(3 + table[H][colum + 1],
-                        3 + table[P][colum + 1]));
-                case P -> table[row][colum] = Math.min(2 + table[E][colum + 1], 3 + table[P][colum + 1]);
-                case C -> table[row][colum] = Math.min(2 + table[E][colum + 1], Math.min(3 + table[C][colum + 1],
-                        3 + table[P][colum + 1]));
-            }
-        }
-    }
-
-    /**
-     * 
-     * @param table
-     * @param colum
-     */
-    private void fillTableCloak(int[][] table, int colum) {
-        for(int row = 0; row < TABLE_DEPTH; row++){
-            switch (row){
-                case E -> table[row][colum] = Math.min(1 + table[E][colum + 1], 2 + table[C][colum + 1]);
-                case H -> table[row][colum] =  Math.min(2 + table[E][colum + 1], Math.min(3 + table[H][colum + 1],
-                        3 + table[C][colum + 1]));
-                case P -> table[row][colum] = Math.min(2 + table[E][colum + 1], Math.min(3 + table[P][colum + 1],
-                        3 + table[C][colum + 1]));
-                case C -> table[row][colum] = Math.min(2 + table[E][colum + 1], 3 + table[C][colum + 1]);
-            }
-        }
-    }
-
-
-
-    /**
-     * 
-     * @param table
-     * @param colum
-     * @param pos
-     */
-    private void resolveCreature(int[][] table, int colum, char pos) {
-        switch (pos){
-            case T_DOG -> fillTableDog(table, colum);
-            case TROLL -> fillTableTroll(table, colum);
-            case DRAGON -> fillTableDragon(table,colum);
-        }
-
-
-
-    }
-
-    /**
-     * 
-     * @param table
-     * @param colum
-     */
-    private void fillTableDog(int[][] table, int colum) {
-        for(int row = 0; row < TABLE_DEPTH; row++){
-            switch (row){
-                case E -> table[row][colum] = INTEGER_INFINITY;
-                case H -> table[row][colum] = 4 + table[H][colum + 1];
-                case P -> table[row][colum] = 5 + table[P][colum + 1];
-                case C -> table[row][colum] = 6 + table[C][colum + 1];
-            }
-        }
-    }
-
-    /**
-     * 
-     * @param table
-     * @param colum
-     */
-    private void fillTableTroll(int[][] table, int colum) {
-        for(int row = 0; row < TABLE_DEPTH; row++){
-            switch (row){
-                case E, H -> table[row][colum] = INTEGER_INFINITY;
-                case P -> table[row][colum] = 5 + table[P][colum + 1];
-                case C -> table[row][colum] = 6 + table[C][colum + 1];
-            }
-        }
-    }
-
-
-    /**
-     * 
-     * @param table
-     * @param colum
-     */
-    private void fillTableDragon(int[][] table, int colum) {
+    private void resolveEmpty( int[][] table, int column){
         for (int row = 0; row < TABLE_DEPTH; row++) {
             switch (row) {
-                case E, H, P -> table[row][colum] = INTEGER_INFINITY;
-                case C -> table[row][colum] = 6 + table[C][colum + 1];
+                case E -> table[row][column] = 1 + table[row][column + 1];
+                case H -> table[row][column] = Math.min(2 + table[E][column + 1], 3 + table[H][column + 1]);
+                case P -> table[row][column] = Math.min(2 + table[E][column + 1], 3 + table[P][column + 1]);
+                case C -> table[row][column] = Math.min(2 + table[E][column + 1], 3 + table[C][column + 1]);
             }
         }
     }
 
 
     /**
+     * Endpoint for when dealing with non-empty easy plots
      * 
-     * @param table
-     * @param colum
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     * @param pos       plot content
      */
-    private void resolveEmpty( int[][] table, int colum){
+    private void resolveItem(int[][] table, int column, char pos) {
+        switch (pos){
+            case HARP -> fillTableHarp(table, column);
+            case POTION -> fillTablePotion(table, column);
+            case CLOAK -> fillTableCloak(table, column);
+        }
+
+    }
+
+    /**
+     * Fills the table with the cases when going through harp easy-plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table
+     */
+    private void fillTableHarp(int[][] table, int column) {
+        for(int row = 0; row < TABLE_DEPTH; row++){
+            switch (row){
+                case E -> table[row][column] = Math.min(1 + table[E][column + 1], 2 + table[H][column + 1]);
+                case H -> table[row][column] = Math.min(2 + table[E][column + 1], 3 + table[H][column + 1]);
+                case P -> table[row][column] = Math.min(2 + table[E][column + 1], Math.min(3 + table[P][column + 1],
+                        3 + table[H][column + 1]));
+                case C -> table[row][column] = Math.min(2 + table[E][column + 1], Math.min(3 + table[C][column + 1],
+                        3 + table[H][column + 1]));
+            }
+        }
+    }
+
+    /**
+     * Fills the table with the cases when going through potion easy-plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     */
+    private void fillTablePotion(int[][] table, int column) {
+        for(int row = 0; row < TABLE_DEPTH; row++){
+            switch (row){
+                case E -> table[row][column] = Math.min(1 + table[E][column + 1], 2 + table[P][column + 1]);
+                case H -> table[row][column] =  Math.min(2 + table[E][column + 1], Math.min(3 + table[H][column + 1],
+                        3 + table[P][column + 1]));
+                case P -> table[row][column] = Math.min(2 + table[E][column + 1], 3 + table[P][column + 1]);
+                case C -> table[row][column] = Math.min(2 + table[E][column + 1], Math.min(3 + table[C][column + 1],
+                        3 + table[P][column + 1]));
+            }
+        }
+    }
+
+    /**
+     * Fills the table with the cases when going through cloak easy-plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     */
+    private void fillTableCloak(int[][] table, int column) {
+        for(int row = 0; row < TABLE_DEPTH; row++){
+            switch (row){
+                case E -> table[row][column] = Math.min(1 + table[E][column + 1], 2 + table[C][column + 1]);
+                case H -> table[row][column] =  Math.min(2 + table[E][column + 1], Math.min(3 + table[H][column + 1],
+                        3 + table[C][column + 1]));
+                case P -> table[row][column] = Math.min(2 + table[E][column + 1], Math.min(3 + table[P][column + 1],
+                        3 + table[C][column + 1]));
+                case C -> table[row][column] = Math.min(2 + table[E][column + 1], 3 + table[C][column + 1]);
+            }
+        }
+    }
+
+
+
+    /**
+     * Endpoint for when dealing with beast-filled plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     * @param pos       plot content
+     */
+    private void resolveCreature(int[][] table, int column, char pos) {
+        switch (pos){
+            case T_DOG -> fillTableDog(table, column);
+            case TROLL -> fillTableTroll(table, column);
+            case DRAGON -> fillTableDragon(table,column);
+        }
+
+
+
+    }
+
+    /**
+     * Fills the table with the cases when dealing with three-headed dog plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     */
+    private void fillTableDog(int[][] table, int column) {
+        for(int row = 0; row < TABLE_DEPTH; row++){
+            switch (row){
+                case E -> table[row][column] = INTEGER_INFINITY;
+                case H -> table[row][column] = 4 + table[H][column + 1];
+                case P -> table[row][column] = 5 + table[P][column + 1];
+                case C -> table[row][column] = 6 + table[C][column + 1];
+            }
+        }
+    }
+
+    /**
+     * Fills the table with the cases when dealing with troll plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     */
+    private void fillTableTroll(int[][] table, int column) {
+        for(int row = 0; row < TABLE_DEPTH; row++){
+            switch (row){
+                case E, H -> table[row][column] = INTEGER_INFINITY;
+                case P -> table[row][column] = 5 + table[P][column + 1];
+                case C -> table[row][column] = 6 + table[C][column + 1];
+            }
+        }
+    }
+
+
+    /**
+     * Fills the table with the cases when dealing with dragon plots
+     * 
+     * @param table     table with results
+     * @param column    column to fill in the table 
+     */
+    private void fillTableDragon(int[][] table, int column) {
         for (int row = 0; row < TABLE_DEPTH; row++) {
             switch (row) {
-                case E -> table[row][colum] = 1 + table[row][colum + 1];
-                case H -> table[row][colum] = Math.min(2 + table[E][colum + 1], 3 + table[H][colum + 1]);
-                case P -> table[row][colum] = Math.min(2 + table[E][colum + 1], 3 + table[P][colum + 1]);
-                case C -> table[row][colum] = Math.min(2 + table[E][colum + 1], 3 + table[C][colum + 1]);
+                case E, H, P -> table[row][column] = INTEGER_INFINITY;
+                case C -> table[row][column] = 6 + table[C][column + 1];
             }
         }
     }
