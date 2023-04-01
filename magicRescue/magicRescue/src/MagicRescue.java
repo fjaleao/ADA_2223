@@ -20,13 +20,13 @@ public class MagicRescue {
     private static final int P = 2; // potion row
     private static final int C = 3; // cloak row
     private static final int INTEGER_INFINITY = 2000000000;
-    //Entry and exit with no item
+    //Entry and exit with no item time unit
     private static final int NO_ITEM_NO_ITEM = 1;
-    //Entry with item and exit with no item
+    //Entry with item and exit with no item time unit
     private static final int ITEM_NO_ITEM = 2;
-    //Entry with no item and exit with item
+    //Entry with no item and exit with item time unit
     private static final int NO_ITEM_ITEM = 2;
-    //Entry with item and exit with item
+    //Entry with item and exit with item time unit
     private static final int ITEM_ITEM = 3;
 
 
@@ -52,7 +52,6 @@ public class MagicRescue {
      */
     private void solve(char[] line) {
         int line_l = line.length;
-        //
         int[] array = new int[TABLE_DEPTH];
         for(int column = line_l - 1 ; column >= 0; column--){
             char pos = line[column];
