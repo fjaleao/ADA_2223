@@ -11,7 +11,7 @@ public class MagicRescue {
     private static final int T_DOG_SOM = 4;
     private static final int TROLL_SOM = 5;
 
-    private static final int DRAGON_SOM =6;
+    private static final int DRAGON_SOM = 6;
 
     private static final int TABLE_DEPTH = 4;
 
