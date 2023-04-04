@@ -12,6 +12,7 @@ public class Main {
         Promotions pro = new Promotions(minProm, maxProm, employees);
         int nProRules = getEndLineNumber(rd);
         getRules(rd, pro, nProRules);
+        //TODO: print dos resultados
         }
 
     private static void getRules(BufferedReader rd, Promotions pro, int nProRules) throws IOException {
@@ -21,7 +22,7 @@ public class Main {
             pro.addRule(employeeX, employeeX);
         }
     }
-    
+
     private static int getEndLineNumber(BufferedReader rd) throws IOException {
         String columns = "";
         char b = (char)rd.read();
