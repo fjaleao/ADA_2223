@@ -1,0 +1,13 @@
+algoritmo: Teste de aciclidade
+
+Objetivo: sequencia de arestas, descobrir quantas conseguimos desenhar. Verificar se algumas das proximas consigo
+desenhar.
+
+Usar partições usado nas teoricas
+Cada vez que recebemos uma aresta vereificar o represenante
+representantes iguais não ciclo
+diferentes fazer aresta - não da ciclo
+
+Problemas.
+Saber os vertices que tenho
+   Precisar resolver o problema que é converter as coordenadas
