@@ -1,23 +1,37 @@
+import java.lang.reflect.Array;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class Tester {
     private final char[][] board;
-    private final boolean[][] found;
+    private int result;
 
     public Tester(char[][] board) {
         this.board = board;
-        this.found = new boolean[board.length][board[0].length];
+
     }
 
 
     public int resolve(int x, int y) {
+        boolean[][] found = new boolean[board.length][board[0].length];
         Queue<Coordinate> waiting = new LinkedList<>();
-        Coordinate current = new Coordinate(x, y);
+        Coordinate current = new Coordinate(x, y, 0);
         waiting.add(current);
         found[x][y] = true;
-        int count = auxresolve(waiting, 0);
+       /* do{
+            Coordinate c = waiting.poll();
+
+        }*/
+        
+
+       /* Coordinate current = new Coordinate(x, y);
+        waiting.add(current);
+        found[x][y] = true;
+        while(!waiting.isEmpty())
         return count;
+
+        */
+        return 0;
     }
 
     private int auxresolve(Queue<Coordinate> waiting, int count){

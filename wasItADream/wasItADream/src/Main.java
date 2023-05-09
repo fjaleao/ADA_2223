@@ -4,6 +4,9 @@ import java.io.InputStreamReader;
 
 public class Main {
 
+    private static final char BOUNDARIES = 'B';
+    private static final int BONDARY = 2;
+
     private static final char SPACE = ' ';
     private static final char CARRIAGE_RETURN = '\n';
 
@@ -38,7 +41,6 @@ public class Main {
 
     private static char[][] getBoard(BufferedReader rd, int colums, int rows) throws IOException {
         char[][] board = new char[rows][colums];
-
         for (int i = 0; i < rows; i++) {
             board[i] = rd.readLine().toCharArray();
         }
