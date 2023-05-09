@@ -10,28 +10,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
-        
-        int rows;
-        int columns;
-        int nTests;
-        char[][] board;
-
         try {
-            rows = getNextInt(rd, SPACE);
-            columns = getNextInt(rd, SPACE);
-            nTests = getNextInt(rd, CARRIAGE_RETURN);
-            board = getBoard(rd, columns, rows);
+            int rows = getNextInt(rd, SPACE);
+            int columns = getNextInt(rd, SPACE);
+            int nTests = getNextInt(rd, CARRIAGE_RETURN);
+            char[][] board = getBoard(rd, columns, rows);
+            Tester t = new Tester(board);
+            for (int i = 0; i < nTests; i++) {
+                int res = t.resolve(getNextInt(rd, SPACE), getNextInt(rd, CARRIAGE_RETURN));
+                System.out.println(res < 0 ? "stuck" : res);
+            }
         } catch (Exception e) {
-
-        }
-
-        Tester t = new Tester(board);
-
-        for (int i = 0; i < nTests; i++) {
-
-            int res = t.resolve(getNextInt(rd, SPACE), getNextInt(rd, CARRIAGE_RETURN));
-
-            System.out.println(res < 0 ? "stuck" : res);
 
         }
 
