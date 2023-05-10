@@ -20,7 +20,7 @@ public class Main {
             char[][] board = getBoard(rd, columns, rows);
             Tester t = new Tester(board);
             for (int i = 0; i < nTests; i++) {
-                int res = t.resolve(getNextInt(rd, SPACE), getNextInt(rd, CARRIAGE_RETURN));
+                int res = t.resolve(getNextInt(rd, SPACE) -1, getNextInt(rd, CARRIAGE_RETURN) -1);
                 System.out.println(res < 0 ? "stuck" : res);
             }
         } catch (Exception e) {
