@@ -1,22 +1,27 @@
 public class Coordinate {
-    private int x, y;
+    private int row, col, level;
     private char type;
 
-    public Coordinate(int x, int y, char type){
-        this.x = x;
-        this.y = y;
+    public Coordinate(int row, int col, char type, int level){
+        this.row = row;
+        this.col = col;
         this.type = type;
+        this.level = level;
     }
 
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
 
-    public int getY(){
-        return y;
+    public int getColumn(){
+        return col;
     }
 
     public char getType(){
         return type;
+    }
+    
+    public int getLevel() {
+    	return level;
     }
 }
