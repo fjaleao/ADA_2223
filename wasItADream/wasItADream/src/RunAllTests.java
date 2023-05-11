@@ -2,8 +2,9 @@
  * @author Carla Ferreira
  *
  */
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -12,8 +13,8 @@ import java.io.PrintStream;
 import java.nio.file.Files;
 import java.util.Locale;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * A classe Tests especifica um conjunto de testes implementado recorrendo 'a ferramenta
@@ -28,17 +29,11 @@ public class RunAllTests {
      * Basta configurar esta sequencia de testes!
      */
 
-
-
     /**
-     * massive test
+     *test
      */
     @Test public void test01() { test("map_2.txt","out_2.txt"); }
 
-    /**
-     * test
-     */
-    //@Test public void test02() { test("test_input.txt","test_output.txt"); }
 
 
 

@@ -12,20 +12,17 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Apanahr linhas");
-            int rows = getNextInt(rd, SPACE);
-        System.out.println("Apanahr colunas");
-            int columns = getNextInt(rd, SPACE);
-                    System.out.println("Apanahr testes");
-            int nTests = getNextInt(rd, CARRIAGE_RETURN);
-        System.out.println("Apanahr quadro");
-            char[][] board = getBoard(rd, columns, rows);
-        System.out.println("Apanahr tester");
-            Tester t = new Tester(board);
-            for (int i = 0; i < nTests; i++) {
-                int res = t.resolve(getNextInt(rd, SPACE) -1, getNextInt(rd, CARRIAGE_RETURN) -1);
-                System.out.println(res < 0 ? "Stuck" : res);
-            }
+        int rows = getNextInt(rd, SPACE);
+        int columns = getNextInt(rd, SPACE);
+        int nTests = getNextInt(rd, CARRIAGE_RETURN);
+        rd.read();
+        char[][] board = getBoard(rd, columns, rows);
+        Tester t = new Tester(board);
+        for (int i = 0; i < nTests; i++) {
+            int res = t.resolve(getNextInt(rd, SPACE) -1, getNextInt(rd, CARRIAGE_RETURN) -1);
+            System.out.println(res < 0 ? "Stuck" : res);
+            rd.read();
+        }
 
     }
 
@@ -36,9 +33,7 @@ public class Main {
             rows += b;
             b = (char) rd.read();
         }
-        System.out.println("String " + rows);
         int i = Integer.parseInt(rows);
-        System.out.println("number " + i);
         return i;
     }
 
