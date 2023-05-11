@@ -1,21 +1,22 @@
 public class Coordinate {
-    int axis, ordinate, count;
+    private int x, y;
+    private char type;
 
-    public Coordinate(int axis, int ordinate, int count){
-        this.axis = axis;
-        this.ordinate = ordinate;
-        this.count = count;
+    public Coordinate(int x, int y, char type){
+        this.x = x;
+        this.y = y;
+        this.type = type;
     }
 
-    public int getAxis(){
-        return axis;
+    public int getX(){
+        return x;
     }
 
-    public int getOrdinate(){
-        return ordinate;
+    public int getY(){
+        return y;
     }
 
-    public int getCount(){
-        return count;
+    public char getType(){
+        return type;
     }
 }
