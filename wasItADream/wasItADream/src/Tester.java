@@ -12,17 +12,19 @@ public class Tester {
 
     private enum Direction {
 
-        NORTH(-1, 0),
-        EAST(0, 1),
-        SOUTH(1, 0),
-        WEST(0, -1);
+        NORTH(-1, 0, "NORTH"),
+        EAST(0, 1, "EAST"),
+        SOUTH(1, 0, "SOUTH"),
+        WEST(0, -1, "WEST");
 
         public final int deltaRow;
         public final int deltaColumn;
+        public final String value; // added for debug
 
-        private Direction(int deltaX, int deltaY) {
+        private Direction(int deltaX, int deltaY, String value) {
             this.deltaRow = deltaX;
             this.deltaColumn = deltaY;
+            this.value = value;
         }
 
     }
@@ -74,8 +76,6 @@ public class Tester {
 
             current = waiting.remove();
             
-            System.out.printf("Current node: (%d, %d)\n", current.getRow(), current.getColumn());
-            
             nMoves = current.getLevel();
 
             if (current.getType() == GOAL)
@@ -85,7 +85,7 @@ public class Tester {
             		Coordinate nextNode = exploreDirection(d, current);
             		if (nextNode != null) {
 		                waiting.add(nextNode);
-		                System.out.printf("Added (%d, %d) to waiting\n", nextNode.getRow(), nextNode.getColumn());
+		                System.out.printf("From %s added (%d, %d) to waiting\n",d.value, nextNode.getRow(), nextNode.getColumn());
             		}
             }
 
@@ -100,26 +100,35 @@ public class Tester {
         int col = current.getColumn();
 
         for (;;) {
-//        	System.out.printf("Currently at: (%d, %d)\nNext step: (%d, %d)\tvalue:%c\n", row, col, row + d.deltaRow, col + d.deltaColumn, board[row + d.deltaRow][col + d.deltaColumn]);
+        	System.out.printf("Currently at: (%d, %d)\nNext step: (%d, %d)\tvalue:%c \t%s found\n\n", 
+        			row, col, row + d.deltaRow, col + d.deltaColumn, board[row + d.deltaRow][col + d.deltaColumn],
+        			found[row + d.deltaRow][col + d.deltaColumn] ? "" : "not");
             
             if (board[row + d.deltaRow][col + d.deltaColumn] == BORDER) {
-            	System.out.printf("Not this way! (%d, %d)\n", row + d.deltaRow, col + d.deltaColumn);
+            	System.out.printf("Not this way! %s\n", d.value);
                 return null; // reached the end of the board
             }
 
             if (board[row + d.deltaRow][col + d.deltaColumn] != OBSTACLE) {
 
                 // go in direction
+            	System.out.printf("Moving %s\n", d.value);
                 row += d.deltaRow;
                 col += d.deltaColumn;
                 found[row][col] = true;
 
-                if (board[row][col] == GOAL)
+                if (board[row][col] == GOAL) {
+                	System.out.println("Objective found!");
                     break; // found objective
+                }
 
             } else {
-            	if (found[row + d.deltaRow][col + d.deltaColumn])
+            	System.out.printf("Stopped at ");
+            	if (found[row][col]) {
+            		System.out.println("known path.");
             		return null; // stopped at a known pathway
+            	}
+            	System.out.println("new node, adding to waiting...");
             	break;
             }
 
