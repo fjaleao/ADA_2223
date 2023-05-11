@@ -25,61 +25,69 @@ public class Tester {
                return c.getCount();
            //go up
            int up = cX;
-           while(up-1 >= 0 && board[up-1][y] != 'O' && board[up-1][y] != 'H'){
-               found[up][y] = true;
-               up--;
-            }
+           if(up-1 >= 0 && !found[up-1][cY]){
+               while(up-1 >= 0 && board[up-1][cY] != 'O' && board[up-1][cY] != 'H'){
+                   found[up][cY] = true;
+                   up--;
+               }
+           }
            if(up-1 >= 0) {
-               char upChar = board[up - 1][y];
+               char upChar = board[up - 1][cY];
                if (upChar == 'H')
                    return c.getCount() + 1;
-               else if (board[up - 1][y] == 'O' && !found[up][y]) {
-                   waiting.add(new Coordinate(up, y, c.getCount() + 1));
+               else if (board[up - 1][cY] == 'O' && !found[up][cY]) {
+                   waiting.add(new Coordinate(up, cY, c.getCount() + 1));
                }
            }
 
            //go down
            int down = cX;
-           while(down+1 < board.length && board[down+1][y] != 'O' && board[down+1][y] != 'H'){
-               found[down][y] = true;
-               down++;
+           if(down+1 < board.length && !found[down+1][cY]){
+               while(down+1 < board.length && board[down+1][cY] != 'O' && board[down+1][cY] != 'H'){
+                   found[down][cY] = true;
+                   down++;
+               }
            }
            if(down+1 < board.length) {
-               char downChar = board[down+1][y];
+               char downChar = board[down+1][cY];
                if (downChar == 'H')
                    return c.getCount() + 1;
-               else if (board[down+1][y] == 'O' && !found[down][y]) {
-                   waiting.add(new Coordinate(down, y, c.getCount() + 1));
+               else if (board[down+1][cY] == 'O' && !found[down][cY]) {
+                   waiting.add(new Coordinate(down, cY, c.getCount() + 1));
                }
            }
 
            //go left
            int left = cY;
-           while(left-1 >= 0 && board[x][left-1] != 'O' && board[x][left-1] != 'H'){
-               found[x][left] = true;
-               left--;
+           if(left-1 >= 0 && !found[cX][left-1]){
+                while(left-1 >= 0 && board[cX][left-1] != 'O' && board[cX][left-1] != 'H'){
+                     found[cX][left] = true;
+                     left--;
+                }
            }
            if(left-1 >= 0) {
-               char leftChar = board[x][left-1];
+               char leftChar = board[cX][left-1];
                if (leftChar == 'H')
                    return c.getCount() + 1;
-               else if (board[x][left-1] == 'O' && !found[x][left]) {
-                   waiting.add(new Coordinate(x, left, c.getCount() + 1));
+               else if (board[cX][left-1] == 'O' && !found[cX][left]) {
+                   waiting.add(new Coordinate(cX, left, c.getCount() + 1));
                }
            }
 
            //go right
            int right = cY;
-           while(right+1 < board[x].length && board[x][right+1] != 'O' && board[x][right+1] != 'H'){
-               found[x][right] = true;
-               right++;
+           if(right+1 < board[cX].length && !found[cX][right+1]){
+                while(right+1 < board[cX].length && board[cX][right+1] != 'O' && board[cX][right+1] != 'H'){
+                     found[cX][right] = true;
+                     right++;
+                }
            }
-           if(right+1 < board[x].length) {
-               char rightChar = board[x][right+1];
+           if(right+1 < board[cX].length) {
+               char rightChar = board[cX][right+1];
                if (rightChar == 'H')
                    return c.getCount() + 1;
-               else if (board[x][right+1] == 'O' && !found[x][right]) {
-                   waiting.add(new Coordinate(x, right, c.getCount() + 1));
+               else if (board[cX][right+1] == 'O' && !found[cX][right]) {
+                   waiting.add(new Coordinate(cX, right, c.getCount() + 1));
                }
            }
         }while(!waiting.isEmpty());
