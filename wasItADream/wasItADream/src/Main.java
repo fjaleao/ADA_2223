@@ -12,29 +12,22 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
-        int rows = getNextInt(rd, SPACE);
-        int columns = getNextInt(rd, SPACE);
-        int nTests = getNextInt(rd, CARRIAGE_RETURN);
-        rd.read();
+        String numbers = rd.readLine();
+        String[] num = numbers.split(" ");
+        int rows = Integer.parseInt(num[0]);
+        int columns = Integer.parseInt(num[1]);
+        int nTests = Integer.parseInt(num[2]);
         char[][] board = getBoard(rd, columns, rows);
         Tester t = new Tester(board);
         for (int i = 0; i < nTests; i++) {
-            int res = t.resolve(getNextInt(rd, SPACE) -1, getNextInt(rd, CARRIAGE_RETURN) -1);
+            numbers = rd.readLine();
+            num = numbers.split(" ");
+            int x = Integer.parseInt(num[0]) - 1;
+            int y = Integer.parseInt(num[1]) - 1;
+            int res = t.resolve(x, y);
             System.out.println(res < 0 ? "Stuck" : res);
-            rd.read();
         }
 
-    }
-
-    private static int getNextInt(BufferedReader rd, char delimiter) throws IOException {
-        String rows = "";
-        char b = (char) rd.read();
-        while (b != delimiter) {
-            rows += b;
-            b = (char) rd.read();
-        }
-        int i = Integer.parseInt(rows);
-        return i;
     }
 
     private static char[][] getBoard(BufferedReader rd, int colums, int rows) throws IOException {

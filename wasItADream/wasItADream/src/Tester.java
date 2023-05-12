@@ -12,6 +12,9 @@ public class Tester {
 
 
     public int resolve(int x, int y) {
+
+
+        
         boolean[][] found = new boolean[board.length][board[0].length];
         Queue<Coordinate> waiting = new LinkedList<>();
         Coordinate current = new Coordinate(x, y, 0);
