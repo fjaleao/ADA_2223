@@ -52,12 +52,12 @@ public class Tester {
         }
         
         //debug
-        System.out.println();
-        for(char[] row : this.board) {
-        	for (char c : row)
-        		System.out.printf("%c", c);
-        	System.out.println();
-        }
+        // System.out.println();
+        // for(char[] row : this.board) {
+        // 	for (char c : row)
+        // 		System.out.printf("%c", c);
+        // 	System.out.println();
+        // }
         
     }
     
@@ -82,10 +82,11 @@ public class Tester {
                 return nMoves;
 
             for (Direction d : Direction.values()) {
+            		// System.out.println("Exploring " + d.value);
             		Coordinate nextNode = exploreDirection(d, current);
             		if (nextNode != null) {
 		                waiting.add(nextNode);
-		                System.out.printf("From %s added (%d, %d) to waiting\n",d.value, nextNode.getRow(), nextNode.getColumn());
+		                // System.out.printf("From %s added (%d, %d) to waiting\n\n",d.value, nextNode.getRow(), nextNode.getColumn());
             		}
             }
 
@@ -100,35 +101,37 @@ public class Tester {
         int col = current.getColumn();
 
         for (;;) {
-        	System.out.printf("Currently at: (%d, %d)\nNext step: (%d, %d)\tvalue:%c \t%s found\n\n", 
-        			row, col, row + d.deltaRow, col + d.deltaColumn, board[row + d.deltaRow][col + d.deltaColumn],
-        			found[row + d.deltaRow][col + d.deltaColumn] ? "" : "not");
+//        	System.out.printf("Currently at: (%d, %d)\nNext step: (%d, %d)\tvalue:%c \t%s found\n\n", 
+//        			row, col, row + d.deltaRow, col + d.deltaColumn, board[row + d.deltaRow][col + d.deltaColumn],
+//        			found[row + d.deltaRow][col + d.deltaColumn] ? "" : "not");
             
             if (board[row + d.deltaRow][col + d.deltaColumn] == BORDER) {
-            	System.out.printf("Not this way! %s\n", d.value);
+            	// System.out.printf("Not this way! %s\n\n", d.value);
                 return null; // reached the end of the board
             }
 
             if (board[row + d.deltaRow][col + d.deltaColumn] != OBSTACLE) {
+            
+            	found[row][col] = true;
 
                 // go in direction
-            	System.out.printf("Moving %s\n", d.value);
+            	// System.out.printf("Moving %s\n", d.value);
                 row += d.deltaRow;
                 col += d.deltaColumn;
-                found[row][col] = true;
 
                 if (board[row][col] == GOAL) {
-                	System.out.println("Objective found!");
+                	// System.out.println("Objective found!");
                     break; // found objective
                 }
 
             } else {
-            	System.out.printf("Stopped at ");
+            	// System.out.printf("Stopped at ");
             	if (found[row][col]) {
-            		System.out.println("known path.");
+            		// System.out.println("known path.\n");
             		return null; // stopped at a known pathway
             	}
-            	System.out.println("new node, adding to waiting...");
+            	// System.out.println("new node, adding to waiting...");
+            	found[row][col] = true;
             	break;
             }
 

@@ -28,7 +28,7 @@ public class Main {
                 int x = getNextInt(rd, SPACE);
                 int y = getNextInt(rd, CARRIAGE_RETURN);
                 
-                System.out.printf("\nResult for test %d:\n", i+1);
+                // System.out.printf("\nResult for test %d:\n", i+1);
                 
                 int res = t.resolve(x, y);
                 System.out.println(res < 0 ? "stuck" : res);
