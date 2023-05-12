@@ -1,21 +1,27 @@
 public class Coordinate {
-    int axis, ordinate, count;
+    private int row, col, level;
+    private char type;
 
-    public Coordinate(int axis, int ordinate, int count){
-        this.axis = axis;
-        this.ordinate = ordinate;
-        this.count = count;
+    public Coordinate(int row, int col, char type, int level){
+        this.row = row;
+        this.col = col;
+        this.type = type;
+        this.level = level;
     }
 
-    public int getAxis(){
-        return axis;
+    public int getRow(){
+        return row;
     }
 
-    public int getOrdinate(){
-        return ordinate;
+    public int getColumn(){
+        return col;
     }
 
-    public int getCount(){
-        return count;
+    public char getType(){
+        return type;
+    }
+    
+    public int getLevel() {
+    	return level;
     }
 }
