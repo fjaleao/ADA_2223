@@ -11,27 +11,30 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader rd = new BufferedReader(new InputStreamReader(System.in));
-        
+
         try {
-        	
-            int rows = getNextInt(rd, SPACE);
-            int columns = getNextInt(rd, SPACE);
-            int nTests = getNextInt(rd, CARRIAGE_RETURN);
-            rd.skip(2); // skip line feed
+
+            String numbers = rd.readLine();
+            String[] num = numbers.split(" ");
+            int rows = Integer.parseInt(num[0]);
+            int columns = Integer.parseInt(num[1]);
+            int nTests = Integer.parseInt(num[2]);
             
             char[][] board = getBoard(rd, columns, rows);
             
             Tester t = new Tester(board);
             
             for (int i = 0; i < nTests; i++) {
-            	
-                int x = getNextInt(rd, SPACE);
-                int y = getNextInt(rd, CARRIAGE_RETURN);
-                
+
+                numbers = rd.readLine();
+                num = numbers.split(" ");
+                int x = Integer.parseInt(num[0]);
+                int y = Integer.parseInt(num[1]);
+
                 // System.out.printf("\nResult for test %d:\n", i+1);
-                
+
                 int res = t.resolve(x, y);
-                System.out.println(res < 0 ? "stuck" : res);
+                System.out.println(res < 0 ? "Stuck" : res);
                 
             }
             
@@ -40,22 +43,22 @@ public class Main {
         }
 
     }
-    
+
 
     private static int getNextInt(BufferedReader rd, char delimiter) throws IOException {
-    	
+
         String rows = "";
         char b;
-        
+
         do {
-        	
+
             b = (char) rd.read();
             rows += b;
-            
+
         } while (b != delimiter);
-        
+
         return Integer.parseInt(rows.trim());
-        
+
     }
 
     private static char[][] getBoard(BufferedReader rd, int columns, int rows) throws IOException {
