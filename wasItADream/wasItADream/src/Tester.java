@@ -21,7 +21,7 @@ public class Tester {
         public final int deltaColumn;
         public final String value; // added for debug
 
-        private Direction(int deltaX, int deltaY, String value) {
+        Direction(int deltaX, int deltaY, String value) {
             this.deltaRow = deltaX;
             this.deltaColumn = deltaY;
             this.value = value;
@@ -36,35 +36,19 @@ public class Tester {
 
 
     public Tester(char[][] board) {
-    	
         this.board = new char[board.length+2][board[0].length+2];
-        
         for (int i = 0; i < this.board.length; i++) {
-        	
         	for (int j = 0; j < this.board[0].length; j++) {
-        		
         		boolean isBorder = i == 0 || i == this.board.length-1 || j == 0 || j == this.board[0].length-1;
-        		
         		this.board[i][j] = isBorder ? BORDER : board[i-1][j-1];
-        		
         	}
-        	
         }
-        
-        //debug
-        // System.out.println();
-        // for(char[] row : this.board) {
-        // 	for (char c : row)
-        // 		System.out.printf("%c", c);
-        // 	System.out.println();
-        // }
         
     }
     
 
     public int resolve(int row, int col) {
 
-        nMoves = -1;
         found = new boolean[board.length][board[0].length];
         found[row][col] = true;
         waiting = new LinkedList<>();
