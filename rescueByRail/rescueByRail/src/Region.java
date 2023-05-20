@@ -28,4 +28,10 @@ public class Region {
         this.departure = departure;
     }
 
+    public boolean isEvacuated() {
+        return this.population == 0;
+    }
+
+    public boolean isFull
+
 }
