@@ -1,11 +1,17 @@
-public class Region {
-    private int population, departure;
+import java.util.Objects;
 
-    public Region(int population, int departure) {
+public class Region {
+    private int population, departure, id;
+
+    public Region(int population, int departure, int id) {
         this.population = population;
         this.departure = departure;
+        this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
     public int getPopulation() {
         return population;
     }
@@ -21,4 +27,5 @@ public class Region {
     public void setDeparture(int departure) {
         this.departure = departure;
     }
+
 }

@@ -1,38 +1,44 @@
-import java.util.List;
+import java.util.*;
 
 public class Rescue {
-    private final int saveRegion;
+    private Map<Integer, List<Region>> regionsConnections;
+    private Region[] regions;
 
-    public Rescue(List regions, List directLinks, int saveRegion) {
-        this.saveRegion = saveRegion;
-        createRegions(regions);
-        createDirectLinks(directLinks);
+
+
+    public Rescue(int nRegions) {
+        this.regionsConnections = new HashMap<>();
+        this.regions = new Region[nRegions];
     }
 
-    private void createDirectLinks(List<String> directLinks) {
-        int nDirectLinks = directLinks.size();
-        for(int i = 0; i < nDirectLinks; i++){
-            String numbers = directLinks.get(i);
-            String[] num = numbers.split(" ");
-            int region1 = Integer.parseInt(num[0]);
-            int region2 = Integer.parseInt(num[1]);
+    public void createDirectLinks(int id1, int id2) {
+        Region region1 = regions[id1];
+        Region region2 = regions[id2];
+        regionsConnections.get(region1.getId()).add(region2);
+        regionsConnections.get(region2.getId()).add(region1);
 
-        }
     }
 
-    private void createRegions(List<String> regions) {
-        int nRegions = regions.size();
-        for(int i = 0; i < nRegions; i++){
-            String numbers = regions.get(i);
-            String[] num = numbers.split(" ");
-            int population = Integer.parseInt(num[0]);
-            int departure = Integer.parseInt(num[1]);
-            Region region = new Region(population, departure);
-        }
+    public void createRegions(int population, int departure) {
+        int id = regionsConnections.size();
+        Region region = new Region(population, departure, id);
+        regions[id] = region;
+        regionsConnections.put(region.getId(), new ArrayList<>());
+
     }
 
 
-    public int resolve() {
+    public int resolve(int saveRegion) {
+
         return 0;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Rescue rescue)) return false;
+        return regionsConnections.equals(rescue.regionsConnections);
+    }
+
 }
+
