@@ -66,6 +66,7 @@ public class Rescue {
         int sinkExit = sinkEntry-1;
         int result = 0;
         int increment;
+        int[] via = new int[nRegions];
 
         while ( ( increment = findPath(sink) )!= 0 ) {
 

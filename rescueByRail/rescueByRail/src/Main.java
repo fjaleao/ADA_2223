@@ -34,9 +34,9 @@ public class Main {
             }
 
             int saveRegion = Integer.parseInt(rd.readLine());
-            //int result = rescue.resolve(saveRegion);
+            int result = rescue.edmondsKarp(saveRegion);
 
-            System.out.println(0);
+            System.out.println(result);
 
             rd.close();
 
