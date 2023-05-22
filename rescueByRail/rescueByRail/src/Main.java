@@ -32,7 +32,7 @@ public class Main {
                 num = numbers.split(" ");
                 int region1 = Integer.parseInt(num[0]);
                 int region2 = Integer.parseInt(num[1]);
-                //rescue.createDirectLinks(region1 ,region2);
+                rescue.addEdge(region1 ,region2);
             }
 
             int saveRegion = Integer.parseInt(rd.readLine());
