@@ -68,7 +68,7 @@ public class Rescue {
         int increment;
         int[] via = new int[nRegions];
 
-        while ( ( increment = findPath(sink) )!= 0 ) {
+        while ( ( increment = findPath(sink, via) )!= 0 ) {
 
             result += increment;
 
@@ -90,7 +90,7 @@ public class Rescue {
     }
     
 
-    int findPath(int sink) {
+    int findPath(int sink, int[] via) {
 
         Queue<Integer> waiting = new LinkedList<>();
         boolean[] found = new boolean[nRegions];
@@ -99,7 +99,7 @@ public class Rescue {
         waiting.add(0);
 
         found[0] = true;
-        // via[0] = 0;
+        via[0] = 0;
         pathIncr[0] = INFINITY;
 
         do {
@@ -115,7 +115,7 @@ public class Rescue {
                     
                     if ( !found[destination] && residue > 0 ) {
 
-                        // via[destination] = origin;
+                        via[destination] = origin;
                         pathIncr[destination] = Math.min(pathIncr[origin], residue);
 
                         if ( destination == sink )
