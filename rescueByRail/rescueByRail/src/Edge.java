@@ -1,26 +1,26 @@
 public class Edge {
-    private int capacity, origin, destination;
+    private int flow, capacity, destination;
 
-    public Edge(int origin, int destination, int capacity) {
-        this.origin = origin;
-        this.destination = destination;
+    public Edge(int destination, int capacity) {
+        this.flow = 0;
         this.capacity = capacity;
+        this.destination = destination;
+    }
+
+    public int getFlow() {
+        return flow;
     }
 
     public int getCapacity() {
         return capacity;
     }
 
-    public int getOrigin() {
-        return origin;
-    }
-
     public int getDestination() {
         return destination;
     }
 
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
+    public void setFlow(int flow) {
+        this.flow = flow;
     }
 
 

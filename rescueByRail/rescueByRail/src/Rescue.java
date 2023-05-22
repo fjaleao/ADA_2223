@@ -1,47 +1,48 @@
-import java.util.*;
 
 public class Rescue {
+
     private static final int ORIGIN = 1;
-    private int nRegions;
-    private List<Edge>[] graph;
+    private static final int INFINITY = Integer.MAX_VALUE;
+
+    private Edge[][] graph;
 
     public Rescue(int nRegions) {
-        this.nRegions = nRegions;
+        
         //Initialize graph
-        this.graph = new List[2*nRegions + ORIGIN];
-        for(int i = 0; i < 2*nRegions + ORIGIN; i++){
-            graph[i] = new LinkedList<>();
-        }
+        int nPos = 2*nRegions + ORIGIN;
+        this.graph = new Edge[nPos][nPos];
+        // {0, 1_e, 1_s, 2_e, 2_s, ..., nRegions_e, nRegions_s}
+
     }
 
     public void createNode(int id, int population, int departure) {
-        int exitId = id*2;
-        int entryId = exitId-1;
+
         //Origin node to node and vice versa
-        Edge outOrigin = new Edge(0, entryId, population);
-        Edge inOrigin = new Edge(entryId, 0, 0);
-        graph[0].add(outOrigin);
-        graph[0].add(inOrigin);
-        graph[entryId].add(outOrigin);
-        graph[entryId].add(inOrigin);
+        connect(0, id, population, 0);
+
         //Entry node to exit node and vice versa
-        Edge inExit = new Edge(entryId, exitId , departure);
-        Edge outExit = new Edge(exitId, entryId, 0);
-        graph[entryId].add(inExit);
-        graph[entryId].add(outExit);
-        graph[exitId].add(inExit);
-        graph[exitId].add(outExit);
+        connect(id, id, 0, departure);
+
     }
 
-    public void connect(int id1, int id2) {
+    public void addEdge(int id1, int id2) {
+
+        connect(id1, id2, INFINITY, 0);
+        connect(id2, id1, INFINITY, 0);
+        
+    }
+
+    public void connect (int id1, int id2, int cap, int revCap) {
+
         int exitId1 = id1*2;
-        int entryId1 = exitId1-1;
         int exitId2 = id2*2;
         int entryId2 = exitId2-1;
-        Edge out1 = new Edge(exitId1, entryId2, Integer.MAX_VALUE);
-        Edge in1 =  new Edge(entryId2, exitId1, 0);
-        Edge out2 = new Edge(exitId2, entryId1, Integer.MAX_VALUE);
-        Edge in2 =  new Edge(entryId1, exitId2, 0);
+
+        Edge edge = new Edge(entryId2, cap);
+        Edge reverse = new Edge (exitId1, revCap);
+
+        graph[exitId1][entryId2] = edge;
+        graph[entryId2][exitId1] = reverse;
         
     }
 
