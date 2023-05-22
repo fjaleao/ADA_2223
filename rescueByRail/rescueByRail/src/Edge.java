@@ -19,8 +19,8 @@ public class Edge {
         return destination;
     }
 
-    public void setFlow(int flow) {
-        this.flow = flow;
+    public void incrementFlow(int value) {
+        this.flow += value;
     }
 
 
