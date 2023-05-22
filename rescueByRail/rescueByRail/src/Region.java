@@ -32,6 +32,6 @@ public class Region {
         return this.population == 0;
     }
 
-    public boolean isFull
+    // public boolean isFull
 
 }

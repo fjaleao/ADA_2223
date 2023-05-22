@@ -17,12 +17,14 @@ public class Main {
             int nDirectLinks = Integer.parseInt(num[1]);
             Rescue rescue = new Rescue(nRegions);
 
-            for(int i = 0; i < nRegions; i++){
+
+            for(int i = 1; i <= nRegions; i++){
                 numbers = rd.readLine();
                 num = numbers.split(" ");
                 int population = Integer.parseInt(num[0]);
                 int departure = Integer.parseInt(num[1]);
-                rescue.createRegion(i, population, departure);
+                rescue.createNode(i, population, departure);
+                //rescue.createRegion(i, population, departure);
             }
 
             for(int i = 0; i < nDirectLinks; i++){
@@ -30,13 +32,13 @@ public class Main {
                 num = numbers.split(" ");
                 int region1 = Integer.parseInt(num[0]);
                 int region2 = Integer.parseInt(num[1]);
-                rescue.createDirectLinks(region1-1 ,region2-1);
+                //rescue.createDirectLinks(region1 ,region2);
             }
 
             int saveRegion = Integer.parseInt(rd.readLine());
-            int result = rescue.resolve(saveRegion);
+            //int result = rescue.resolve(saveRegion);
 
-            System.out.println(result);
+            System.out.println(0);
 
             rd.close();
 
