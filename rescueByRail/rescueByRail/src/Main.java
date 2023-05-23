@@ -22,7 +22,6 @@ public class Main {
                 int population = Integer.parseInt(num[0]);
                 int departure = Integer.parseInt(num[1]);
                 rescue.createNode(i, population, departure);
-                //rescue.createRegion(i, population, departure);
             }
 
             for(int i = 0; i < nDirectLinks; i++){

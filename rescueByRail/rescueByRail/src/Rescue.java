@@ -1,8 +1,6 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.w3c.dom.Node;
-
 public class Rescue {
 
     private static final int ORIGIN = 1;
@@ -15,12 +13,10 @@ public class Rescue {
 
     public Rescue(int nRegions) {
 
-        this.nRegions = nRegions;
-        
-        int nPos = 2*nRegions + ORIGIN;
+        this.nRegions = 2*nRegions + ORIGIN;
         
         //Initialize graph
-        this.graph = new Edge[nPos][nPos];
+        this.graph = new Edge[this.nRegions][this.nRegions];
         // {0, 1_e, 1_s, 2_e, 2_s, ..., nRegions-1_e, nRegions-1_s}
 
     }
@@ -62,18 +58,17 @@ public class Rescue {
 
     public int edmondsKarp(int sink) {
 
-        int sinkEntry = sink*2;
-        int sinkExit = sinkEntry-1;
-        int result = 0;
+        int sinkExit = sink*2-1;
+        int[] via = new int[graph.length];
+        int flowValue = 0;
         int increment;
-        int[] via = new int[nRegions];
 
-        while ( ( increment = findPath(sink, via) )!= 0 ) {
+        while ( ( increment = findPath(sinkExit, via) ) != 0 ) {
 
-            result += increment;
+            flowValue += increment;
 
             // Update flow.
-            int node = sinkEntry;
+            int node = sinkExit;
             while ( node != 0 ) {
 
                 int origin = via[node];
@@ -85,7 +80,7 @@ public class Rescue {
 
         }
 
-        return result;
+        return flowValue;
 
     }
     
@@ -111,7 +106,7 @@ public class Rescue {
                 if (e != null) {
 
                     int destination = e.getDestination();
-                    int residue = e.getFlow() - graph[origin][destination].getFlow();
+                    int residue = e.getCapacity() - graph[origin][destination].getFlow();
                     
                     if ( !found[destination] && residue > 0 ) {
 
