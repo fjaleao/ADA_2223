@@ -1,14 +1,9 @@
 public class Edge {
-    private int flow, capacity, destination;
+    private int capacity, destination;
 
     public Edge(int destination, int capacity) {
-        this.flow = 0;
         this.capacity = capacity;
         this.destination = destination;
-    }
-
-    public int getFlow() {
-        return flow;
     }
 
     public int getCapacity() {
@@ -17,10 +12,6 @@ public class Edge {
 
     public int getDestination() {
         return destination;
-    }
-
-    public void incrementFlow(int value) {
-        this.flow += value;
     }
 
 

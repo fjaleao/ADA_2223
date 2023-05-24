@@ -1,5 +1,4 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Rescue {
 
@@ -8,7 +7,7 @@ public class Rescue {
 
 
     private int nRegions;
-    private Edge[][] graph;
+    private Map<Integer, List<Edge>> graph;
 
 
     public Rescue(int nRegions) {
@@ -16,7 +15,7 @@ public class Rescue {
         this.nRegions = 2*nRegions + ORIGIN;
         
         //Initialize graph
-        this.graph = new Edge[this.nRegions][this.nRegions];
+        this.graph = new HashMap<>();
         // {0, 1_e, 1_s, 2_e, 2_s, ..., nRegions-1_e, nRegions-1_s}
 
     }
@@ -50,8 +49,19 @@ public class Rescue {
         Edge edge = new Edge(entryId2, cap);
         Edge reverse = new Edge (exitId1, revCap);
 
-        graph[exitId1][entryId2] = edge;
-        graph[entryId2][exitId1] = reverse;
+        List<Edge> outIncidentEdges = graph.get(exitId1);
+        if ( outIncidentEdges == null ) {
+            outIncidentEdges = new ArrayList<>();
+            graph.put(exitId1, outIncidentEdges);
+        }
+        outIncidentEdges.add(edge);
+
+        List<Edge> inIncidentEdges = graph.get(entryId2);
+        if ( inIncidentEdges == null ) {
+            inIncidentEdges = new ArrayList<>();
+            graph.put(entryId2, inIncidentEdges);
+        }
+        inIncidentEdges.add(reverse);
         
     }
 
@@ -59,11 +69,12 @@ public class Rescue {
     public int edmondsKarp(int sink) {
 
         int sinkExit = sink*2-1;
-        int[] via = new int[graph.length];
+        int[][]flow = new int[nRegions][nRegions];
+        int[] via = new int[nRegions];
         int flowValue = 0;
         int increment;
 
-        while ( ( increment = findPath(sinkExit, via) ) != 0 ) {
+        while ( ( increment = findPath(sinkExit, via, flow) ) != 0 ) {
 
             flowValue += increment;
 
@@ -72,8 +83,8 @@ public class Rescue {
             while ( node != 0 ) {
 
                 int origin = via[node];
-                graph[origin][node].incrementFlow(increment);
-                graph[node][origin].incrementFlow(-increment);;
+                flow[origin][node] += increment;
+                flow[node][origin] += -increment;
                 node = origin;
 
             }
@@ -85,7 +96,7 @@ public class Rescue {
     }
     
 
-    int findPath(int sink, int[] via) {
+    int findPath(int sink, int[] via, int[][]flow) {
 
         Queue<Integer> waiting = new LinkedList<>();
         boolean[] found = new boolean[nRegions];
@@ -100,28 +111,24 @@ public class Rescue {
         do {
 
             int origin = waiting.remove();
+            List<Edge> outIncidentEdges = graph.get(origin);
 
-            for (Edge e : graph[origin]) {
-
-                if (e != null) {
-
-                    int destination = e.getDestination();
-                    int residue = e.getCapacity() - graph[origin][destination].getFlow();
+            for (Edge e : outIncidentEdges) {
+                int destination = e.getDestination();
+                int residue = e.getCapacity() - flow[origin][destination];
                     
-                    if ( !found[destination] && residue > 0 ) {
+                if ( !found[destination] && residue > 0 ) {
 
-                        via[destination] = origin;
-                        pathIncr[destination] = Math.min(pathIncr[origin], residue);
+                    via[destination] = origin;
+                    pathIncr[destination] = Math.min(pathIncr[origin], residue);
 
-                        if ( destination == sink )
-                            return pathIncr[destination];
+                    if ( destination == sink )
+                        return pathIncr[destination];
 
-                        waiting.add(destination);
-                        found[destination] = true;
+                    waiting.add(destination);
+                    found[destination] = true;
 
                     }
-
-                }
 
             }
 
