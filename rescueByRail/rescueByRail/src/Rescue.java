@@ -13,6 +13,7 @@ public class Rescue {
     private List<Integer>[] edges;
 
 
+    @SuppressWarnings("unchecked")
     public Rescue(int nRegions) {
 
         this.nRegions = 2*nRegions + ORIGIN;
