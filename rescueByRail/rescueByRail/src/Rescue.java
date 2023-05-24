@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class Rescue {
@@ -9,6 +10,7 @@ public class Rescue {
 
     private int nRegions;
     private Edge[][] graph;
+    private List<Integer>[] edges;
 
 
     public Rescue(int nRegions) {
@@ -18,6 +20,8 @@ public class Rescue {
         //Initialize graph
         this.graph = new Edge[this.nRegions][this.nRegions];
         // {0, 1_e, 1_s, 2_e, 2_s, ..., nRegions-1_e, nRegions-1_s}
+
+        this.edges = new List[this.nRegions];
 
     }
 
@@ -30,13 +34,18 @@ public class Rescue {
         //Entry node to exit node and vice versa
         connect(id, id, 0, departure);
 
+        edges[id] = new LinkedList<>();
+
     }
 
 
     public void addEdge(int id1, int id2) {
 
         connect(id1, id2, INFINITY, 0);
+        edges[id1].add(id2);
+
         connect(id2, id1, INFINITY, 0);
+        edges[id2].add(id1);
         
     }
 
@@ -101,27 +110,24 @@ public class Rescue {
 
             int origin = waiting.remove();
 
-            for (Edge e : graph[origin]) {
+            for (int id : edges[origin]) {
+                Edge e = graph[origin][id];
+                
+                int destination = e.getDestination();
+                int residue = e.getCapacity() - graph[origin][destination].getFlow();
+                
+                if ( !found[destination] && residue > 0 ) {
 
-                if (e != null) {
+                    via[destination] = origin;
+                    pathIncr[destination] = Math.min(pathIncr[origin], residue);
 
-                    int destination = e.getDestination();
-                    int residue = e.getCapacity() - graph[origin][destination].getFlow();
-                    
-                    if ( !found[destination] && residue > 0 ) {
+                    if ( destination == sink )
+                        return pathIncr[destination];
 
-                        via[destination] = origin;
-                        pathIncr[destination] = Math.min(pathIncr[origin], residue);
-
-                        if ( destination == sink )
-                            return pathIncr[destination];
-
-                        waiting.add(destination);
-                        found[destination] = true;
+                    waiting.add(destination);
+                    found[destination] = true;
 
                     }
-
-                }
 
             }
 
