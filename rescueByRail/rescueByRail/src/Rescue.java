@@ -22,6 +22,8 @@ public class Rescue {
         // {0, 1_e, 1_s, 2_e, 2_s, ..., nRegions-1_e, nRegions-1_s}
 
         this.edges = new List[this.nRegions];
+        for(int i = 0; i < this.nRegions; i++)
+            edges[i] = new LinkedList<>();
 
     }
 
@@ -34,7 +36,6 @@ public class Rescue {
         //Entry node to exit node and vice versa
         connect(id, id, 0, departure);
 
-        edges[id] = new LinkedList<>();
 
     }
 
@@ -42,10 +43,8 @@ public class Rescue {
     public void addEdge(int id1, int id2) {
 
         connect(id1, id2, INFINITY, 0);
-        edges[id1].add(id2);
 
         connect(id2, id1, INFINITY, 0);
-        edges[id2].add(id1);
         
     }
 
@@ -60,7 +59,10 @@ public class Rescue {
         Edge reverse = new Edge (exitId1, revCap);
 
         graph[exitId1][entryId2] = edge;
+        edges[exitId1].add(entryId2);
+
         graph[entryId2][exitId1] = reverse;
+        edges[entryId2].add(exitId1);
         
     }
 
