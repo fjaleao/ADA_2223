@@ -110,10 +110,9 @@ public class Rescue {
 
             int origin = waiting.remove();
 
-            for (int id : edges[origin]) {
-                Edge e = graph[origin][id];
-                
-                int destination = e.getDestination();
+            for (int destination : edges[origin]) {
+                Edge e = graph[origin][destination];
+
                 int residue = e.getCapacity() - graph[origin][destination].getFlow();
                 
                 if ( !found[destination] && residue > 0 ) {
